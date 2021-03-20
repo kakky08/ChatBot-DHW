@@ -1,10 +1,26 @@
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import { Home } from "./Home";
+import { ChatBot } from "./chatBot";
 import "./styles.css";
 
 export default function App() {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route
+          path="/chatBot"
+          render={() => (
+            <Switch>
+              <Route exact path="/chatBot">
+                <ChatBot />
+              </Route>
+            </Switch>
+          )}
+        ></Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
