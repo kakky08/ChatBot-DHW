@@ -1,10 +1,10 @@
 import React from "react";
 import { Answer } from "./index";
 
-const AnsersList = () => {
+const AnsersList = (props) => {
   return (
-    <div className="c-grit_answer">
-      <Answer />
+    <div className="c-grid__answer">
+      <Answer content={"hoge"} />
     </div>
   );
 };
