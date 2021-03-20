@@ -24,7 +24,7 @@ export class ChatBot extends React.Component {
   };
 
   componentDidMount() {
-    this.initAnswers();
+    this.initAnswer();
   }
 
   render() {
