@@ -23,6 +23,7 @@ export class ChatBot extends React.Component {
       type: "question"
     });
     this.setState({
+      answers: this.state.dataset[nextQuestionId].answers,
       chats: chats,
       currentId: nextQuestionId
     });
@@ -31,32 +32,26 @@ export class ChatBot extends React.Component {
   selectAnswer = (selectedAnswer, nextQuestionId) => {
     switch (true) {
       case nextQuestionId === "init":
+        this.displayNextQuestion(nextQuestionId);
         break;
       default:
-        const chat = {
+        const chats = this.state.chats;
+        chats.push({
           text: selectedAnswer,
           type: "answer"
-        };
-        const chats = this.state.chats;
-        chats.push(chat);
+        });
 
         this.setState({
           chats: chats
         });
+        this.displayNextQuestion(nextQuestionId);
         break;
     }
   };
-  initAnswer = () => {
-    const initDataset = this.state.dataset[this.state.currentId];
-    const initAnswers = initDataset.answers;
-    this.setState({
-      answers: initAnswers
-    });
-  };
 
   componentDidMount() {
-    this.initChats();
-    this.initAnswer();
+    const initAnswer = "";
+    this.selectAnswer(initAnswer, this.state.currentId);
   }
 
   render() {
