@@ -16,25 +16,41 @@ export class ChatBot extends React.Component {
     };
   }
 
+  displayNextQuestion = (nextQuestionId) => {
+    const chats = this.state.chats;
+    chats.push({
+      text: this.state.dataset[nextQuestionId].question,
+      type: "question"
+    });
+    this.setState({
+      chats: chats,
+      currentId: nextQuestionId
+    });
+  };
+
+  selectAnswer = (selectedAnswer, nextQuestionId) => {
+    switch (true) {
+      case nextQuestionId === "init":
+        break;
+      default:
+        const chat = {
+          text: selectedAnswer,
+          type: "answer"
+        };
+        const chats = this.state.chats;
+        chats.push(chat);
+
+        this.setState({
+          chats: chats
+        });
+        break;
+    }
+  };
   initAnswer = () => {
     const initDataset = this.state.dataset[this.state.currentId];
     const initAnswers = initDataset.answers;
     this.setState({
       answers: initAnswers
-    });
-  };
-
-  initChats = () => {
-    const initDataset = this.state.dataset[this.state.currentId];
-    const chat = {
-      text: initDataset.question,
-      type: "question"
-    };
-    const chats = this.state.chats;
-    chats.push(chat);
-
-    this.setState({
-      chats: chats
     });
   };
 
